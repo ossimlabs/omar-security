@@ -33,14 +33,20 @@ node("master"){
     }
 
     try {
-     stage ("Publish Plugin Artifactory")
-      {
-        sh """
-        pushd ${workspaceDir}/${appName}/plugins/${appName}-plugin
-        ./gradlew artifactoryPublish
-        popd
-        """
-      }
+        stage ("Publish Plugin Artifactory")
+        {
+            withCredentials([[$class: 'UsernamePasswordMultiBinding', 
+                            credentialsId: 'artifactoryCredentials',
+                            usernameVariable: 'ARTIFACTORY_USER', 
+                            passwordVariable: 'ARTIFACTORY_PASSWORD']])
+            {
+                sh """
+                pushd ${workspaceDir}/${appName}/plugins/${appName}-plugin
+                ./gradlew artifactoryPublish
+                popd
+                """
+            } 
+        }
     }
     catch(e){
         echo e.toString()
