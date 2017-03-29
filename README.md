@@ -1,3 +1,3 @@
 # omar-security
 
-[![BuildStatus](https://jenkins.radiantbluecloud.com/view/OMAR-DEV-Builds/job/omar-security-dev/badge/icon)]()
+[![BuildStatus](https://jenkins.radiantbluecloud.com/buildStatus/icon?job=omar-security-dev)]()
