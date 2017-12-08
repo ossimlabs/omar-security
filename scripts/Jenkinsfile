@@ -18,14 +18,14 @@ node(""){
 
     stage("Checkout"){
         dir("ossim-ci") {
-            git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/ossim-ci.git"
+            git branch: "${OSSIM_GIT_BRANCH}", url: "${GIT_PUBLIC_SERVER_URL}/ossim-ci.git"
         }
         dir(appName) {
-            git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/${appName}.git"
+            git branch: "${OSSIM_GIT_BRANCH}", url: "${GIT_PUBLIC_SERVER_URL}/${appName}.git"
         }
 
         dir(omarCommonProjName) {
-            git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/${omarCommonProjName}.git"
+            git branch: "${OSSIM_GIT_BRANCH}", url: "${GIT_PUBLIC_SERVER_URL}/${omarCommonProjName}.git"
         }
 
         notifyObj = load "${workspaceDir}/ossim-ci/jenkins/pipeline/notify.groovy"
