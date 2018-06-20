@@ -11,7 +11,7 @@
 //==================================================================================================
 
 def notifyObj
-node(""){
+node("omar-build"){
     def workspaceDir = pwd()
     def appName = "omar-security"
     def omarCommonProjName = "omar-common"
