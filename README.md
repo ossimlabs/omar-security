@@ -1,6 +1,6 @@
 # omar-security
 
-[![Build Status](https://jenkins.radiantbluecloud.com/buildStatus/icon?job=omar-security-dev)]()
+[![Build Status](https://jenkins.ossim.io/buildStatus/icon?job=omar-security-dev)]()
 
 ### Required environment variable
 - OMAR_COMMON_PROPERTIES
