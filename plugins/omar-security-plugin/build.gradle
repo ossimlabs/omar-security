@@ -4,7 +4,7 @@ buildscript {
     }
     repositories {
         mavenLocal()
-        maven { url "https://repo.grails.org/grails/core" }
+        maven { url "${ossimMavenProxy}" }
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
@@ -12,8 +12,7 @@ buildscript {
     }
 }
 
-version buildVersion
-group "omar.security.plugin"
+group "io.ossim.omar.plugins"
 
 apply plugin:"eclipse"
 apply plugin:"idea"
@@ -24,7 +23,7 @@ apply plugin:"org.grails.grails-gsp"
 
 repositories {
     mavenLocal()
-    maven { url "https://repo.grails.org/grails/core" }
+    maven { url "${ossimMavenProxy}" }
 }
 
 dependencies {
