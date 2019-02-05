@@ -1,4 +1,7 @@
 buildscript {
+    if(System.env.OMAR_COMMON_PROPERTIES) {
+      apply from: System.env.OMAR_COMMON_PROPERTIES
+    }
     repositories {
         mavenLocal()
         maven { url "https://repo.grails.org/grails/core" }
