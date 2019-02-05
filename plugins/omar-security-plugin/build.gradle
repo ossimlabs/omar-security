@@ -1,109 +1,85 @@
 buildscript {
-  ext {
-    grailsVersion = project.grailsVersion
-    baseImage = ""
-  }
-  if(System.env.OMAR_COMMON_PROPERTIES)
-  {
-    apply from: System.env.OMAR_COMMON_PROPERTIES
-  }
-  repositories {
-    mavenLocal()
-    maven { url "${ossimMavenProxy}" }
-    if( !System.env.WWW_CONNECTED || Boolean.parseBoolean( System.env.WWW_CONNECTED ) ) {
-      maven { url "https://repo.grails.org/grails/core" }
+    repositories {
+        mavenLocal()
+        maven { url "https://repo.grails.org/grails/core" }
     }
-  }
-  dependencies {
-    classpath "org.grails:grails-gradle-plugin:$grailsVersion"
-    classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.8.2"
-  }
+    dependencies {
+        classpath "org.grails:grails-gradle-plugin:$grailsVersion"
+        classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.14.2"
+    }
 }
 
-plugins {
-  id "com.github.ben-manes.versions" version "0.13.0"
-  id "org.sonarqube" version "2.5"
-}
+version "0.1"
+group "omar.security.plugin"
 
-apply plugin: "eclipse"
-apply plugin: "idea"
-apply plugin: "org.grails.grails-plugin"
-apply plugin: "org.grails.grails-plugin-publish"
-apply plugin: "org.grails.grails-gsp"
-apply plugin: "asset-pipeline"
-
-apply plugin: "java"
-apply plugin: "maven-publish"
-
-group "io.ossim.omar.plugins"
-
-ext {
-  grailsVersion = project.grailsVersion
-  gradleWrapperVersion = project.gradleWrapperVersion
-}
+apply plugin:"eclipse"
+apply plugin:"idea"
+apply plugin:"org.grails.grails-plugin"
+apply plugin:"org.grails.grails-plugin-publish"
+apply plugin:"asset-pipeline"
+apply plugin:"org.grails.grails-gsp"
 
 repositories {
-  mavenLocal()
-  maven { url "${ossimMavenProxy}" }
-  if( !System.env.WWW_CONNECTED || Boolean.parseBoolean( System.env.WWW_CONNECTED ) ) {
-    mavenCentral()
+    mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
-  }
-}
-
-dependencyManagement {
-  imports {
-    mavenBom "org.grails:grails-bom:$grailsVersion"
-  }
-  applyMavenExclusions false
 }
 
 dependencies {
-  compile "org.springframework.boot:spring-boot-starter-logging"
-  compile "org.springframework.boot:spring-boot-autoconfigure"
-  compile "org.grails:grails-core"
-  compile "org.springframework.boot:spring-boot-starter-actuator"
-  compile "org.springframework.boot:spring-boot-starter-tomcat"
-  compile "org.grails:grails-dependencies:3.1.14"
-  compile "org.grails:grails-web-boot"
-  compile "org.grails.plugins:cache"
-  compile "org.grails.plugins:scaffolding"
-  console "org.grails:grails-console"
-  profile "org.grails.profiles:web-plugin"
-  provided "org.grails:grails-plugin-services"
-  provided "org.grails:grails-plugin-domain-class"
-  runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.8.2"
-  testCompile "org.grails:grails-plugin-testing"
-  testCompile "org.grails.plugins:geb"
-  testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.52.0"
-  testRuntime "net.sourceforge.htmlunit:htmlunit:2.23"
+    compile "org.springframework.boot:spring-boot-starter-logging"
+    compile "org.springframework.boot:spring-boot-autoconfigure"
+    compile "org.grails:grails-core"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile "org.springframework.boot:spring-boot-starter-tomcat"
+    compile "org.grails:grails-web-boot"
+    compile "org.grails:grails-logging"
+    compile "org.grails:grails-plugin-rest"
+    compile "org.grails:grails-plugin-databinding"
+    compile "org.grails:grails-plugin-i18n"
+    compile "org.grails:grails-plugin-services"
+    compile "org.grails:grails-plugin-url-mappings"
+    compile "org.grails:grails-plugin-interceptors"
+    compile "org.grails.plugins:cache"
+    compile "org.grails.plugins:async"
+    compile "org.grails.plugins:scaffolding"
+    compile "org.grails.plugins:gsp"
+    console "org.grails:grails-console"
+    profile "org.grails.profiles:web-plugin"
+    provided "org.grails:grails-plugin-services"
+    provided "org.grails:grails-plugin-domain-class"
+    runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.14.2"
+    testCompile "org.grails:grails-gorm-testing-support"
+    testCompile "org.grails:grails-plugin-testing"
+    testCompile "org.grails:grails-web-testing-support"
 
-  compile "org.grails.plugins:spring-security-core:3.0.3"
+    compile "org.grails.plugins:spring-security-core:3.2.3"
+
+    compile "org.webjars:jquery:2.2.0"
+    compile "org.webjars:bootstrap:3.3.5"
+    compile "org.webjars:bootswatch:3.3.5+4"
+    compile "org.webjars:Eonasdan-bootstrap-datetimepicker:4.15.35"
+    compile "org.webjars:momentjs:2.11.0"
 }
+
+bootRun {
+    jvmArgs('-Dspring.output.ansi.enabled=always')
+    addResources = true
+}
+// enable if you wish to package this plugin as a standalone application
+bootRepackage.enabled = false
+grailsPublish {
+    // TODO: Provide values here
+    user = 'user'
+    key = 'key'
+    githubSlug = 'foo/bar'
+    license {
+        name = 'Apache-2.0'
+    }
+    title = "My Plugin"
+    desc = "Full plugin description"
+    developers = [johndoe:"John Doe"]
+}
+
 
 assets {
-  packagePlugin = true
-}
-
-grailsPublish {
-  // TODO: Provide values here
-  user = "user"
-  key = "key"
-  githubSlug = "foo/bar"
-  license {
-    name = "Apache-2.0"
-  }
-  title = "My Plugin"
-  desc = "Full plugin description"
-  developers = [johndoe:"John Doe"]
-  portalUser = ""
-  portalPassword = ""
-}
-
-publishing {
-  publications {
-    mavenJava(MavenPublication) {
-      from components.java
-    }
-  }
+    packagePlugin = true
 }

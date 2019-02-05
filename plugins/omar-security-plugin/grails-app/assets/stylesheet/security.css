@@ -1,0 +1,6 @@
+.security-classification {
+	font-weight: bold;
+	position: sticky;
+	text-align: center;
+	z-index: 9999;
+}

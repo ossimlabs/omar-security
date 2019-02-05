@@ -1,0 +1,4 @@
+#savedLinksDialog .modal-body {
+	overflow-x: auto;
+	overflow-y: auto;
+}
