@@ -10,7 +10,7 @@ class Preference {
 	Double brightness = 0
 	Double contrast = 1
 	String coordinateFormat = "dd"
-	String dynamicRangeAdjustment = "auto_min_max"
+	String dynamicRangeAdjustment = "auto-minmax"
 	String dynamicRangeAdjustmentRegion = "global"
 	String interpolation = "bilinear"
 	Boolean nullPixelFlip = true

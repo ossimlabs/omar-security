@@ -15,6 +15,7 @@ class TlvPreference {
 	String startDate = ""
 	Boolean swipe = false
 	Boolean terrainWireframe = false
+	String viewSpace = 'ortho'
 	String wmsTileSchema = "multiple"
 
 
