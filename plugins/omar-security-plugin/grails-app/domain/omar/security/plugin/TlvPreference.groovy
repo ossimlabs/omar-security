@@ -7,7 +7,7 @@ class TlvPreference {
 	String endDate = ""
 	String location = ""
 	Double maxCloudCover = 100
-	Integer maxResults = 10
+	Integer maxResults = 25
 	Double minNiirs = 0
 	Boolean overviewMap = false
 	Boolean searchOriginLayer = false
