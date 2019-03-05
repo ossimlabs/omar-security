@@ -31,6 +31,26 @@ function deleteSavedLink( id ) {
     });
 }
 
+function displayInfoDialog( message ) {
+    var div = document.createElement(  'div' );
+    var id = new Date().getTime();
+    $( div ).attr( 'id', id );
+    $( div ).html( message );
+
+    var infoDialog = $( "#infoDialog" );
+    infoDialog.prepend( div );
+	infoDialog.fadeIn();
+    setTimeout( function() {
+        if ( infoDialog.children().length == 1 ) {
+            infoDialog.fadeOut();
+            setTimeout( function() { $( '#' + id ).remove(); }, 1000 );
+        }
+        else {
+            $( '#' + id ).remove();
+        }
+    }, 5000 );
+}
+
 function editSavedLink( data ) {
     return $.ajax({
         contentType: "application/json",
@@ -198,11 +218,24 @@ function updatePreferences( key, value, type ) {
 
 
     $.ajax({
-        contentType: "application/json",
+        contentType: 'application/json',
         data: JSON.stringify( data ),
         method: "POST",
-        url: preferences.contextPath + "/preferences/updatePreferences"
-    });
+        url: preferences.contextPath + '/preferences/updatePreferences'
+    })
+    .done( function() {
+        key = key.replace( /([A-Z])/g, ' $1' )
+            .replace( /^./, function( str ) { return str.toUpperCase(); } );
+
+        if ( typeof data.value == "boolean" ) {
+            key = key.replace( 'Enabled', '' );
+            value = data.value ? 'enabled' : 'disabled';
+            displayInfoDialog( 'The ' + key + ' has been successfully ' + value + '!' );
+        }
+        else {
+            displayInfoDialog( 'The ' + key + ' has been successfully updated to "' + value + '"!' );
+        }
+    } );
 }
 
 function updateSaveLinkLabels() {

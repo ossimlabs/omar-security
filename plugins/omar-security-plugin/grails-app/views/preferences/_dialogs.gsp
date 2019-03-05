@@ -1,3 +1,5 @@
+<div class = "alert" id = "infoDialog"></div>
+
 <div class = "modal" id = "saveLinkDialog" role = "dialog" tabindex = "-1">
 	<div class = "modal-dialog">
 		<div class = "modal-content">
