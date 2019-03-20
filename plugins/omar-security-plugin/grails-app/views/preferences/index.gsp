@@ -36,6 +36,7 @@
 								]
 							],
 							[ href: "search", label: "Search", subHrefs: [
+									[ href: "searchDataTypeFilters", label: "Data Types" ],
 									[ href: "searchKeywordFilters", label: "Keyword Filters" ],
 									[ href: "searchRangeFilters", label: "Range FIlters" ],
 									[ href: "searchTemporalFilters", label: "Temporal Filters" ],

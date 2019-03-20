@@ -2,6 +2,26 @@
 <h2 align = "center" id = "search">Search</h2>
 
 
+<div id = "searchDataTypeFilters">
+    <h3>Default Data Types</h3>
+    <div class = "row">
+        <g:each in = "${[
+            [ key: "imageryEnabled", value: "Imagery" ],
+            [ key: "videoEnabled", value: "Video" ]
+        ]}">
+            <div class = "col-md-4">
+                <%
+                    def selectedDataType = userPreferences.o2SearchPreference[ it.key ]
+                %>
+                <select class = "form-control" onchange = "updatePreferences( '${ it.key }', $( this ).val(), 'o2Search' );">
+                    <option ${ selectedDataType ? "selected" : "" } value = true>${ it.value }: Yes</option>
+                    <option ${ !selectedDataType ? "selected" : "" } value = false>${ it.value }: No</option>
+                </select>
+            </div>
+        </g:each>
+    </div>
+</div>
+
 <div id = "searchKeywordFilters">
     <h3>Default Keywords</h3>
     <div class = "row">
@@ -266,18 +286,18 @@
         <div class = "col-md-12">
             <select class = "form-control" onchange = "updatePreferences( 'resultsSort', $( this ).val(), 'o2Search' )" >
                 <g:each in = "${[
-                    [ label: "Acquired (New)", value: "acquisition_date,+D,Acquired (New)" ],
-                    [ label: "Acquired (Old)", value: "acquisition_date,+A,Acquired (Old)" ],
-                    [ label: "Image ID (Asc)", value: "title,+A,Image ID (Asc)" ],
-                    [ label: "Image ID (Desc)", value: "title,+D,Image ID (Desc)" ],
-                    [ label: "Ingested (New)", value: "ingest_date,+D,Ingest (New)" ],
-                    [ label: "Ingested (Old)", value: "ingest_date,+A,Ingest (Old)" ],
-                    [ label: "Misson (Asc)", value: "mission_id,+A,Mission (Asc)" ],
-                    [ label: "Misson (Desc)", value: "mission_id,+D,Mission (Desc)" ],
-                    [ label: "NIIRS (High Rating)", value: "niirs,+D,NIIRS (High Rating)" ],
-                    [ label: "NIIRS (Low Rating)", value: "niirs,+A,NIIRS (Low Rating)" ],
-                    [ label: "Sensor (Asc)", value: "sensor_id,+A,Sensor (Asc)" ],
-                    [ label: "Sensor (Desc)", value: "sensor_id,+D,Sensor (Desc)" ]
+                    [ label: "Acquired", value: "acquisition_date,+D,Acquired" ],
+                    [ label: "Acquired", value: "acquisition_date,+A,Acquired" ],
+                    [ label: "Image ID", value: "title,+D,Image ID" ],
+                    [ label: "Image ID", value: "title,+A,Image ID" ],
+                    [ label: "Ingested", value: "ingest_date,+D,Ingest" ],
+                    [ label: "Ingested", value: "ingest_date,+A,Ingest" ],
+                    [ label: "Misson", value: "mission_id,+D,Mission" ],
+                    [ label: "Misson", value: "mission_id,+A,Mission" ],
+                    [ label: "NIIRS", value: "niirs,+D,NIIRS" ],
+                    [ label: "NIIRS", value: "niirs,+A,NIIRS" ],
+                    [ label: "Sensor", value: "sensor_id,+D,Sensor" ],
+                    [ label: "Sensor", value: "sensor_id,+A,Sensor" ]
                 ]}">
                     <%
                         def selectedResultsSort = userPreferences.o2SearchPreference.resultsSort == it.value ? "selected" : ""

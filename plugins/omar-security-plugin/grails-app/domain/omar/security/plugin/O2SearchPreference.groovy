@@ -1,5 +1,9 @@
 package omar.security.plugin
 
+
+import groovy.sql.Sql
+
+
 class O2SearchPreference {
 
 	Boolean azimuthEnabled = false
@@ -25,6 +29,7 @@ class O2SearchPreference {
 	String filename = ""
 	Boolean filenameEnabled = false
 	String imageId = ""
+	Boolean imageryEnabled = true
 	Boolean imageIdEnabled = false
 	Boolean jpipImageButton = true
 	Boolean jpipOrthoButton = true
@@ -40,7 +45,7 @@ class O2SearchPreference {
 	Double niirsMin = 0
 	String productType = ""
 	Boolean productTypeEnabled = false
-	String resultsSort = "acquisition_date,+D,Acquired (New)"
+	String resultsSort = "acquisition_date,+D,Acquired"
 	String sensorId = ""
 	Boolean sensorIdEnabled = false
 	Boolean shareLinkButton = true
@@ -53,6 +58,7 @@ class O2SearchPreference {
 	Double sunElevationMin = -90
 	String targetId = ""
 	Boolean targetIdEnabled = false
+	Boolean videoEnabled = false
 	Boolean viewMetadataButton = true
 	Boolean viewOrthoImageButton = true
 	String wac = ""
