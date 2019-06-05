@@ -1,6 +1,4 @@
 ---
-defaultUsername: Anonymous
-
 requestHeaderUsername: username
 
 securityClassification:
@@ -140,3 +138,7 @@ grails:
 endpoints:
     jmx:
         unique-names: true
+
+---
+defaultPreferences:
+    defaultUsername: Anonymous
