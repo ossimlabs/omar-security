@@ -4,3 +4,23 @@
 	text-align: center;
 	z-index: 9999;
 }
+
+.unknown {
+    background-color: lightgray !important;
+    color: black !important;
+}
+
+.unclassified {
+    background-color: green !important;
+    color: white !important;
+}
+
+.secret {
+    background-color: red !important;
+    color: white !important;
+}
+
+.top-secret {
+    background-color: yellow !important;
+    color: black !important;
+}
