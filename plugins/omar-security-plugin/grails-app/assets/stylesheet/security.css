@@ -5,11 +5,6 @@
 	z-index: 9999;
 }
 
-.unknown {
-    background-color: lightgray !important;
-    color: black !important;
-}
-
 .unclassified {
     background-color: green !important;
     color: white !important;
