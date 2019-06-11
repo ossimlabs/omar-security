@@ -7,9 +7,10 @@
     <div class = "row">
         <g:each in = "${[
             [ key: "brightness", label: "Brightness", max: 1, min: -1 ],
-            [ key: "contrast", label: "Contrast", max: 20, min: 0.1 ]
+            [ key: "contrast", label: "Contrast", max: 20, min: 0.1 ],
+            [ key: "sharpenPercent", label: "Sharpen", max: 1, min: 0 ]
         ]}">
-            <div class = "col-md-6">
+            <div class = "col-md-4">
                 <div align = "center">${ it.label }: <span>${ userPreferences[ "${ it.key }" ] }</span></div>
                 <input class = "form-control" onchange = "updatePreferences( '${ it.key }', $( this ).val() )" oninput = "updateSliderValue( this )" max = "${ it.max }" min = "${ it.min }" step = "0.1" type = "range" value = "${ userPreferences[ "${ it.key }" ] }">
             </div>
@@ -113,13 +114,6 @@
                 key: "nullPixelFlip", options: [
                     [ label: "Null Pixel Flip: No", value: false ],
                     [ label: "Null Pixel Flip: Yes", value: true ]
-                ]
-            ],
-            [
-                key: "sharpenMode", options: [
-                    [ label: "Sharpen Mode: Heavy", value: "heavy" ],
-                    [ label: "Sharpen Mode: None", value: "none" ],
-                    [ label: "Sharpen Mode: Light", value: "light" ]
                 ]
             ]
         ]}">
