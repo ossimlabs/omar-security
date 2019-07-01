@@ -38,6 +38,6 @@ class SecurityService {
         def username = request.getHeader( headerUsername )
 
 
-        return ( ! ( username in [ "(null)", null ]  ) ) ? username : grailsApplication.config.defaultUsername
+        return ( ! ( username in [ "(null)", null ]  ) ) ? username : grailsApplication.config.defaultPreferences.defaultUsername
     }
 }

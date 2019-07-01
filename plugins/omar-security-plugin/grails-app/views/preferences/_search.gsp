@@ -307,29 +307,4 @@
             </select>
         </div>
     </div>
-
-    <h3>Default Buttons in Results</h3>
-    <div class = "row">
-        <g:each in = "${[
-            [ key: "copyWmsButton", value: "Copy WMS" ],
-            [ key: "downloadImageButton", value: "Download Image" ],
-            [ key: "downloadKmlButton", value: "Download KML" ],
-            [ key: "jpipImageButton", value: "JPIP Image" ],
-            [ key: "jpipOrthoButton", value: "JPIP Ortho" ],
-            [ key: "shareLinkButton", value: "Share Link" ],
-            [ key: "viewMetadataButton", value: "View Metadata" ],
-            [ key: "viewOrthoImageButton", value: "View Ortho Image" ],
-            [ key: "zoomToImageExtentButton", value: "Zoom to Image Extent" ]
-        ]}">
-            <div class = "col-md-4">
-                <%
-                    def selectedButton = userPreferences.o2SearchPreference[ it.key ]
-                %>
-                <select class = "form-control" onchange = "updatePreferences( '${ it.key }', $( this ).val(), 'o2Search' );">
-                    <option ${ selectedButton ? "selected" : "" } value = true>${ it.value }: Show</option>
-                    <option ${ !selectedButton ? "selected" : "" } value = false>${ it.value }: Hide</option>
-                </select>
-            </div>
-        </g:each>
-    </div>
 </div>
