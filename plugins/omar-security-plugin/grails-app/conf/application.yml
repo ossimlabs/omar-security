@@ -1,36 +1,8 @@
 ---
-defaultPreferences:
-    defaultUsername: Anonymous
-
-requestHeaderUsername: username
-
-securityClassification:
-    backgroundColor: green
-    classification: UNCLASSIFIED
-    textColor: white
-
----
-grails:
-    plugin:
-        springsecurity:
-            userLookup:
-                userDomainClassName: 'omar.security.SecUser'
-                authorityJoinClassName: 'omar.security.SecUserSecRole'
-            authority:
-                className: 'omar.security.SecRole'
-            controllerAnnotations:
-                staticRules:
-                    - pattern: '/**'
-                      access: [ 'permitAll' ]
-
----
 grails:
     profile: web-plugin
     codegen:
         defaultPackage: omar.security.plugin
-    spring:
-        transactionManagement:
-            proxies: false
     gorm:
         reactor:
             # Whether to translate GORM events into Reactor events

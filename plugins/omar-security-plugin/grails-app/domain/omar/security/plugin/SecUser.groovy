@@ -1,17 +1,18 @@
 package omar.security.plugin
 
-
+import grails.plugin.springsecurity.SpringSecurityService
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
+import grails.compiler.GrailsCompileStatic
 
-
+@GrailsCompileStatic
 @EqualsAndHashCode(includes='username')
 @ToString(includes='username', includeNames=true, includePackage=false)
 class SecUser implements Serializable {
 
 	private static final long serialVersionUID = 1
 
-	transient springSecurityService
+	SpringSecurityService springSecurityService
 
 	String username
 	String password
@@ -20,14 +21,8 @@ class SecUser implements Serializable {
 	boolean accountLocked
 	boolean passwordExpired
 
-	SecUser(String username, String password) {
-		this()
-		this.username = username
-		this.password = password
-	}
-
 	Set<SecRole> getAuthorities() {
-		SecUserSecRole.findAllBySecUser(this)*.secRole
+		(SecUserSecRole.findAllBySecUser(this) as List<SecUserSecRole>)*.secRole as Set<SecRole>
 	}
 
 	def beforeInsert() {
@@ -47,13 +42,11 @@ class SecUser implements Serializable {
 	static transients = ['springSecurityService']
 
 	static constraints = {
-		username blank: false, unique: true
-		password blank: false
+		password nullable: false, blank: false, password: true
+		username nullable: false, blank: false, unique: true
 	}
 
 	static mapping = {
 		password column: '`password`'
-		username index: "sec_user_username_idx"
-
 	}
 }
