@@ -14,9 +14,9 @@ dependencies {
     }
 
     compile 'org.grails.plugins:spring-security-core:4.0.0.RC2'
-    // compile "org.webjars:jquery:3.4.1"
-    // compile "org.webjars:bootstrap:3.3.5"
-    // compile "org.webjars:bootswatch:3.3.5+4"
+    compile "org.webjars:jquery:3.4.1"
+    compile "org.webjars:bootstrap:3.3.5"
+    compile "org.webjars:bootswatch:3.3.5+4"
     compile "org.webjars:Eonasdan-bootstrap-datetimepicker:4.17.47"
-    // compile "org.webjars:momentjs:2.24.0"   
+    compile 'org.webjars:momentjs:2.24.0'
 }

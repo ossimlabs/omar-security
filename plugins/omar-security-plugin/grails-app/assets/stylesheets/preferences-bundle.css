@@ -1,5 +1,6 @@
 /*
-*= require webjars/Eonasdan-bootstrap-datetimepicker/4.15.35/css/bootstrap-datetimepicker.min.css
+*= require webjars/bootstrap/3.3.5/css/bootstrap.min
+*= require webjars/Eonasdan-bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css
 *= require security.css
 *= require preferences.css
 *= require saved-link.css
