@@ -1,16 +1,22 @@
-// sourceSets.main.output.classesDir = 'build/classes/groovy/main'
-// io.ossim.gradleDefaults.Variables.setAdditionalVariables(project)
-// io.ossim.gradleDefaults.Variables.setVersionVariables(project)
-// version "${buildVersion}-${buildVersionTag}"
-// jarDestination = "${projectDir}/build/libs/${project.name}-${version}.jar"
-// io.ossim.gradleDefaults.Publications.addPublication(project, groupName, name, "${buildVersion}-${buildVersionTag}")
-// io.ossim.gradleDefaults.Publications.addRepository(project, mavenPublishUrl, mavenRepoUsername, mavenRepoPassword)
-
+if ( System.getenv('O2_INLINE_BUILD') ) {
+    grails {
+        plugins {
+            if ( System.getenv('O2_INLINE_BUILD') ) {
+            //    compile project(":omar-core-plugin")
+            }
+        }
+    }
+}
 dependencies {
-    compile "org.grails.plugins:spring-security-core:3.2.3"
-    compile "org.webjars:jquery:2.2.0"
+    //compile project( ":${ rootProject.name }-lib" )
+    if ( ! System.getenv('O2_INLINE_BUILD') ) {
+    // compile "io.ossim.omar.plugins:omar-core-plugin:+"
+    }
+
+    compile 'org.grails.plugins:spring-security-core:4.0.0.RC2'
+    compile "org.webjars:jquery:3.4.1"
     compile "org.webjars:bootstrap:3.3.5"
     compile "org.webjars:bootswatch:3.3.5+4"
-    compile "org.webjars:Eonasdan-bootstrap-datetimepicker:4.15.35"
-    compile "org.webjars:momentjs:2.11.0"
+    compile "org.webjars:Eonasdan-bootstrap-datetimepicker:4.17.47"
+    compile 'org.webjars:momentjs:2.24.0'
 }

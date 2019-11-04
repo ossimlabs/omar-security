@@ -1,6 +1,6 @@
 package omar.security.plugin
 
-
+import java.text.SimpleDateFormat
 import grails.util.Holders
 
 
@@ -19,7 +19,7 @@ class O2SearchPreference {
 	Double cloudCoverMin = defaultPreferences.cloudCoverMin ?: 0
 	String countryCode = defaultPreferences.countryCode ?: ""
 	Boolean countryCodeEnabled = defaultPreferences.countryCodeEnabled ?: false
-	String customEndDateTime = new Date().format( "yyyy-MM-dd HH:mm:ss" )
+	String customEndDateTime = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" ).format(new Date())
 	String customStartDateTime = defaultPreferences.customStartDateTime ?: "1970-01-01 00:00:00"
 	String dateType = defaultPreferences.dateType ?: "acquisition_date"
 	String duration = defaultPreferences.duration ?: "none"
