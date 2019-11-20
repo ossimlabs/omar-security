@@ -32,10 +32,11 @@ node("${BUILD_NODE}"){
 
     stage ("Assemble") {
         sh """
-        gradle assemble \
+        ./gradlew assemble \
             -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
         """
         archiveArtifacts "plugins/*/build/libs/*.jar"
+        // archiveArtifacts "apps/*/build/libs/*.jar"
     }
 
     stage ("Publish Nexus")
@@ -46,15 +47,52 @@ node("${BUILD_NODE}"){
                         passwordVariable: 'MAVEN_REPO_PASSWORD']])
         {
             sh """
-            gradle publish \
+            ./gradlew publish \
                 -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
             """
         }
     }
 
-   stage("Clean Workspace")
-   {
-      if ("${CLEAN_WORKSPACE}" == "true")
-        step([$class: 'WsCleanup'])
-   }
+    /*
+    stage ("Publish Docker App")
+    {
+        withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                        credentialsId: 'dockerCredentials',
+                        usernameVariable: 'DOCKER_REGISTRY_USERNAME',
+                        passwordVariable: 'DOCKER_REGISTRY_PASSWORD']])
+        {
+            // Run all tasks on the app. This includes pushing to OpenShift and S3.
+            sh """
+            ./gradlew pushDockerImage \
+                -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
+            """
+        }
+    }
+
+    try {
+        stage ("OpenShift Tag Image")
+        {
+            withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                            credentialsId: 'openshiftCredentials',
+                            usernameVariable: 'OPENSHIFT_USERNAME',
+                            passwordVariable: 'OPENSHIFT_PASSWORD']])
+            {
+                // Run all tasks on the app. This includes pushing to OpenShift and S3.
+                sh """
+                    ./gradlew openshiftTagImage \
+                        -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
+
+                """
+            }
+        }
+    } catch (e) {
+        echo e.toString()
+    }
+    */
+    
+    stage("Clean Workspace")
+    {
+        if ("${CLEAN_WORKSPACE}" == "true")
+            step([$class: 'WsCleanup'])
+    }
 }
