@@ -286,18 +286,18 @@
         <div class = "col-md-12">
             <select class = "form-control" onchange = "updatePreferences( 'resultsSort', $( this ).val(), 'o2Search' )" >
                 <g:each in = "${[
-                    [ label: "Acquired", value: "acquisition_date,+D,Acquired" ],
-                    [ label: "Acquired", value: "acquisition_date,+A,Acquired" ],
-                    [ label: "Image ID", value: "title,+D,Image ID" ],
-                    [ label: "Image ID", value: "title,+A,Image ID" ],
-                    [ label: "Ingested", value: "ingest_date,+D,Ingest" ],
-                    [ label: "Ingested", value: "ingest_date,+A,Ingest" ],
-                    [ label: "Misson", value: "mission_id,+D,Mission" ],
-                    [ label: "Misson", value: "mission_id,+A,Mission" ],
-                    [ label: "NIIRS", value: "niirs,+D,NIIRS" ],
-                    [ label: "NIIRS", value: "niirs,+A,NIIRS" ],
-                    [ label: "Sensor", value: "sensor_id,+D,Sensor" ],
-                    [ label: "Sensor", value: "sensor_id,+A,Sensor" ]
+                    [ label: "Acquired (Des.)", value: "acquisition_date,+D,Acquired" ],
+                    [ label: "Acquired (Asc.)", value: "acquisition_date,+A,Acquired" ],
+                    [ label: "Image ID (Des.)", value: "title,+D,Image ID" ],
+                    [ label: "Image ID (Asc.)", value: "title,+A,Image ID" ],
+                    [ label: "Ingested (Des.)", value: "ingest_date,+D,Ingest" ],
+                    [ label: "Ingested (Asc.)", value: "ingest_date,+A,Ingest" ],
+                    [ label: "Misson (Des.)", value: "mission_id,+D,Mission" ],
+                    [ label: "Misson (Asc.)", value: "mission_id,+A,Mission" ],
+                    [ label: "NIIRS (Des.)", value: "niirs,+D,NIIRS" ],
+                    [ label: "NIIRS (Asc.)", value: "niirs,+A,NIIRS" ],
+                    [ label: "Sensor (Des.)", value: "sensor_id,+D,Sensor" ],
+                    [ label: "Sensor (Asc.)", value: "sensor_id,+A,Sensor" ]
                 ]}">
                     <%
                         def selectedResultsSort = userPreferences.o2SearchPreference.resultsSort == it.value ? "selected" : ""
