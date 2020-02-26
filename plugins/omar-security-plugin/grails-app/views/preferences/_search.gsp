@@ -64,7 +64,8 @@
             [ key: "elevation", label: "Elevation/Graze (deg)", max: 90, min: 0, step: 1 ],
             [ key: "niirs", label: "NIIRS", max: 9, min: 0, step: 0.1 ],
             [ key: "sunAzimuth", label: "Sun Azimuth (deg)", max: 360, min: 0, step: 1 ],
-            [ key: "sunElevation", label: "Sun Elevation (deg)", max: 90, min: -90 ]
+            [ key: "sunElevation", label: "Sun Elevation (deg)", max: 90, min: -90 ],            
+            [ key: "gsd", label: "Ground Sample Distance (m)", max: 50, min: 0 ],                                           
         ]}">
             <div class = "col-md-2">
                 <div align = "center">${ it.label }</div>
