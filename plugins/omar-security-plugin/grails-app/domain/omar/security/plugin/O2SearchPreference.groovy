@@ -30,6 +30,7 @@ class O2SearchPreference {
 	Boolean filenameEnabled = defaultPreferences.filenameEnabled ?: false
 	Double gsdMax = defaultPreferences.gsdMax ?: 50
 	Double gsdMin = defaultPreferences.gsdMin ?: 0
+	Boolean gsdEnabled = defaultPreferences.gsdEnabled ?: false
 	String imageId = defaultPreferences.imageId ?: ""
 	Boolean imageryEnabled = defaultPreferences.imageryEnabled ?: true
 	Boolean imageIdEnabled = defaultPreferences.imageIdEnabled ?: false
