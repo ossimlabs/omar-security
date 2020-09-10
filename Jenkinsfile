@@ -13,10 +13,30 @@ properties([
 
 node("${BUILD_NODE}"){
 
-    stage("Checkout branch $BRANCH_NAME")
+    stage("Checkout branch")
     {
-        checkout(scm)
-    }
+        scmVars = checkout(scm)
+        
+        GIT_BRANCH_NAME = scmVars.GIT_BRANCH
+        BRANCH_NAME = """${sh(returnStdout: true, script: "echo ${GIT_BRANCH_NAME} | awk -F'/' '{print \$2}'").trim()}"""
+        sh """
+        touch buildVersion.txt
+        grep buildVersion gradle.properties | cut -d "=" -f2 > "buildVersion.txt"
+        """
+        preVERSION = readFile "buildVersion.txt"
+        VERSION = preVERSION.substring(0, preVERSION.indexOf('\n'))
+
+        GIT_TAG_NAME = "omar-security" + "-" + VERSION
+        ARTIFACT_NAME = "ArtifactName"
+
+        script {
+          if (BRANCH_NAME != 'master') {
+            buildName "${VERSION} - ${BRANCH_NAME}-SNAPSHOT"
+          } else {
+            buildName "${VERSION} - ${BRANCH_NAME}"
+          }
+        }
+      }
 
     stage("Load Variables")
     {
@@ -28,6 +48,20 @@ node("${BUILD_NODE}"){
         }
 
         load "common-variables.groovy"
+        
+             switch (BRANCH_NAME) {
+        case "master":
+          TAG_NAME = VERSION
+          break
+
+        case "dev":
+          TAG_NAME = "latest"
+          break
+
+        default:
+          TAG_NAME = BRANCH_NAME
+          break
+      }
     }
 
     stage ("Assemble") {
