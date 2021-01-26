@@ -4,7 +4,14 @@ properties([
     buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '3', daysToKeepStr: '', numToKeepStr: '20'))
 ])
 
-podTemplate() {
+podTemplate(containers: [
+    containerTemplate(
+        name: 'jdk11',
+        image: 'openjdk:11',
+        ttyEnabled: true,
+        command: 'cat'
+    )]
+) {
   node(POD_LABEL) {
     stage("Checkout branch") {
       scmVars = checkout(scm)
