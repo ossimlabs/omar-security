@@ -33,21 +33,23 @@ podTemplate() {
       load "common-variables.groovy"
     }
 
-    stage("Assemble") {
-      sh """
-        ./gradlew assemble -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}
-      """
-      archiveArtifacts "plugins/*/build/libs/*.jar"
-    }
-
-    stage("Publish Nexus") {
-      withCredentials([[$class          : 'UsernamePasswordMultiBinding',
-                        credentialsId   : 'nexusCredentials',
-                        usernameVariable: 'MAVEN_REPO_USERNAME',
-                        passwordVariable: 'MAVEN_REPO_PASSWORD']]) {
+    container('jdk11') {
+      stage("Assemble") {
         sh """
-          ./gradlew publish -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}
+          ./gradlew assemble -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}
         """
+        archiveArtifacts "plugins/*/build/libs/*.jar"
+      }
+
+      stage("Publish Nexus") {
+        withCredentials([[$class          : 'UsernamePasswordMultiBinding',
+                          credentialsId   : 'nexusCredentials',
+                          usernameVariable: 'MAVEN_REPO_USERNAME',
+                          passwordVariable: 'MAVEN_REPO_PASSWORD']]) {
+          sh """
+            ./gradlew publish -PossimMavenProxy=${MAVEN_DOWNLOAD_URL}
+          """
+        }
       }
     }
   }
