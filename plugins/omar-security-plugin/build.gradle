@@ -1,22 +1,12 @@
-if ( System.getenv('O2_INLINE_BUILD') ) {
-    grails {
-        plugins {
-            if ( System.getenv('O2_INLINE_BUILD') ) {
-            //    compile project(":omar-core-plugin")
-            }
-        }
-    }
-}
 dependencies {
-    //compile project( ":${ rootProject.name }-lib" )
-    if ( ! System.getenv('O2_INLINE_BUILD') ) {
-    // compile "io.ossim.omar.plugins:omar-core-plugin:+"
-    }
+    implementation 'org.grails.plugins:spring-security-core:4.0.0.RC2'
+    implementation "org.webjars:jquery:3.4.1"
+    implementation "org.webjars:bootstrap:3.3.5"
+    implementation "org.webjars:bootswatch:3.3.5+4"
+    implementation "org.webjars:Eonasdan-bootstrap-datetimepicker:4.17.47"
+    implementation 'org.webjars:momentjs:2.24.0'    
+}
 
-    compile 'org.grails.plugins:spring-security-core:4.0.0.RC2'
-    compile "org.webjars:jquery:3.4.1"
-    compile "org.webjars:bootstrap:3.3.5"
-    compile "org.webjars:bootswatch:3.3.5+4"
-    compile "org.webjars:Eonasdan-bootstrap-datetimepicker:4.17.47"
-    compile 'org.webjars:momentjs:2.24.0'
+assets {
+    packagePlugin = true
 }
